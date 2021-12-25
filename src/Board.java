@@ -51,6 +51,7 @@ public class Board {
         return tempPlace;
     }
 
+    /////Salam Bagher
     public void debug(){
         for (Place p : places){
             System.out.println(p.getFirstNode());
