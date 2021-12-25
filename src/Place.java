@@ -5,6 +5,7 @@ public class Place {
 
     boolean isEmpty ;
     boolean isVertical;
+    Piece placedPiece;
 
     boolean isFirstPositive;
     boolean isSecondPositive;
@@ -24,5 +25,15 @@ public class Place {
 
     public Node getSecondNode() {
         return secondNode;
+    }
+
+    public void setPiecePN(Place p){
+
+    }
+    public void setPieceNP(Place p){
+
+    }
+    public void setPieceEmpty(Place p){
+
     }
 }
