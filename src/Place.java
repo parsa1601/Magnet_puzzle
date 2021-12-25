@@ -15,6 +15,7 @@ public class Place {
         this.isVertical = isVertical;
         this.isEmpty = true;
         this.firstNode.neighbour = this.secondNode;
+        this.secondNode.neighbour = this.firstNode;
     }
 
     public Node getFirstNode() {
