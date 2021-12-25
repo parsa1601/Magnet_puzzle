@@ -32,14 +32,14 @@ public class Place {
         return secondNode;
     }
 
-    public void setplacedPieceEmpty() {
+    public void setPlacedPieceEmpty() {
         placedPiece.setPieceEmpty(this);
 
     }
-    public void setplacedPiecePN() {
+    public void setPlacedPiecePN() {
         placedPiece.setPiecePN(this);
     }
-    public void setplacedPieceNP() {
+    public void setPlacedPieceNP() {
         placedPiece.setPieceNP(this);
     }
 

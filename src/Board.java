@@ -67,6 +67,17 @@ public class Board {
         tempPlace = new Place(tempNode1, tempNode2, isVertical);
         return tempPlace;
     }
+
+    public void setPieceE(Place p){
+        p.setPlacedPieceEmpty();
+    }
+    public void setPieceNP(Place p){
+        p.setPlacedPieceNP();
+    }
+    public void setPiecePN(Place p){
+        p.setPlacedPiecePN();
+    }
+
     public void debug(){
         int c=0;
         /**
