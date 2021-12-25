@@ -20,4 +20,8 @@ public class Node {
     public int getColumnNum() {
         return columnNum;
     }
+
+    public Node getNeighbour() {
+        return neighbour;
+    }
 }
