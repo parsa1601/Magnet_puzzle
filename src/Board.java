@@ -13,6 +13,7 @@ public class Board {
         int[][] matrix = io.getMatrix();
         n=io.getN();
         m=io.getM();
+
         for (int i=0;i<n;i++){
             for (int j =0;j<m;j++){
                 if(i==n-1&&j==m-1){
@@ -28,7 +29,7 @@ public class Board {
                     }
                 }else if(i!=n-1&&j!=m-1){
                     if (matrix[i][j]==matrix[i][j+1]){
-
+                        places.add(placeCreator(i,j,i,j+1,false));
                     }else if (matrix[i][j]==matrix[i+1][j]){
                         places.add(placeCreator(i,j,i+1,j,true));
                     }
@@ -51,10 +52,19 @@ public class Board {
         return tempPlace;
     }
 
-    /////Salam Bagher
     public void debug(){
+        int c=0;
         for (Place p : places){
-            System.out.println(p.getFirstNode());
+            System.out.println("this is place:");
+            System.out.println(c);
+            System.out.println(p.isVertical);
+            System.out.println("this is place first node:");
+            System.out.println(p.getFirstNode().getRowNum());
+            System.out.println(p.getFirstNode().getColumnNum());
+            System.out.println("this is place second node:");
+            System.out.println(p.getSecondNode().getRowNum());
+            System.out.println(p.getSecondNode().getColumnNum());
+            c++;
         }
     }
 }
