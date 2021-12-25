@@ -11,6 +11,7 @@ public class Node {
         this.rowNum = rowNum;
         this.columnNum = columnNum;
         this.isFirst = isFirst;
+        this.isEmpty =true;
     }
 
     public int getRowNum() {
@@ -23,5 +24,18 @@ public class Node {
 
     public Node getNeighbour() {
         return neighbour;
+    }
+
+    public void changeMeP(){
+        this.isEmpty =false;
+        isPositive = true;
+    }
+    public void changeMeN(){
+        this.isEmpty =false;
+        isPositive = false;
+    }
+    public void changeMeE(){
+        this.isEmpty = true;
+
     }
 }

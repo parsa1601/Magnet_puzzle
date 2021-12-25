@@ -5,7 +5,7 @@ public class Place {
 
     boolean isEmpty ;
     boolean isVertical;
-    Piece placedPiece;
+    Piece placedPiece ;
 
     boolean isFirstPositive;
     boolean isSecondPositive;
@@ -17,6 +17,11 @@ public class Place {
         this.isEmpty = true;
         this.firstNode.neighbour = this.secondNode;
         this.secondNode.neighbour = this.firstNode;
+        placedPiece = new Piece() ;
+    }
+    public  Place (Piece piece,boolean isVertical){
+        this.placedPiece =piece;
+        this.isEmpty = isVertical;
     }
 
     public Node getFirstNode() {
@@ -27,13 +32,15 @@ public class Place {
         return secondNode;
     }
 
-    public void setPiecePN(Place p){
+    public void setplacedPieceEmpty() {
+        placedPiece.setPieceEmpty(this);
 
     }
-    public void setPieceNP(Place p){
-
+    public void setplacedPiecePN() {
+        placedPiece.setPiecePN(this);
     }
-    public void setPieceEmpty(Place p){
-
+    public void setplacedPieceNP() {
+        placedPiece.setPieceNP(this);
     }
+
 }
