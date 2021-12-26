@@ -1,7 +1,7 @@
 public class Constraint {
-    //row constraint
-    //column constraint
-    //magnetic constraint
+
+    /**row constraint */
+
     public int rowConstraintP(int row,Board board){
         // 1 : more
         // 0 : constraint satisfied
@@ -46,6 +46,8 @@ public class Constraint {
         }
         return -1;
     }
+
+    /**column constraint*/
 
     public int columnConstraintP(int column,Board board){
         // 1 : more
@@ -93,8 +95,32 @@ public class Constraint {
         return -1;
     }
 
+    /**magnetic constraint */
 
+    public boolean isMagneticConstraintSatisfied(Board board,Place place){
+        if(checkFirst(board, place)&&checkSecond(board, place)){
+            return true;
+        }
 
+        return false;
+    }
+    private boolean checkFirst(Board board,Place place){
+        int i = place.getFirstNode().rowNum;
+        int j = place.getFirstNode().columnNum;
+
+        return false;
+    }
+    private boolean checkSecond(Board board,Place place){
+        int i = place.getSecondNode().rowNum;
+        int j = place.getSecondNode().columnNum;
+
+        return false;
+    }
+
+    private boolean checkTop(int i,int j){
+
+        return false;
+    }
 
 
 }
