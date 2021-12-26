@@ -108,51 +108,140 @@ public class Constraint {
         int i = place.getFirstNode().rowNum;
         int j = place.getFirstNode().columnNum;
         int d =0;
-        System.out.println(d);
         if(place.isVertical) {
             // right , left , up
             if(isUP_ok(board,i,j)){
                 d++;
-                System.out.println(d);
             }
+            if(isRight_ok(board,i,j)){
+                d++;
+            }
+            if(isLeft_ok(board,i,j)){
+                d++;
+            }
+
         }else{
             //left , down , up
+            if(isUP_ok(board,i,j)){
+                d++;
+            }
+            if(isDown_ok(board,i,j)){
+                d++;
+            }
+            if(isLeft_ok(board,i,j)){
+                d++;
+            }
+
         }
-        return false;
+        if(d==3){
+            return true;
+        }else {
+            return false;
+        }
     }
     private boolean checkSecond(Board board,Place place){
         int i = place.getSecondNode().rowNum;
         int j = place.getSecondNode().columnNum;
         int d =0;
-        System.out.println(d);
+
         if(place.isVertical) {
             // right , left , down
+            if(isDown_ok(board,i,j)){
+                d++;
+            }
+            if(isLeft_ok(board,i,j)){
+                d++;
+            }
+            if(isRight_ok(board,i,j)){
+                d++;
+            }
+
         }else{
             //right , down , up
             if(isUP_ok(board,i,j)){
                 d++;
-                System.out.println(d);
             }
+            if(isDown_ok(board,i,j)){
+                d++;
+            }
+            if(isRight_ok(board,i,j)){
+                d++;
+            }
+
         }
-        return false;
+        if(d==3){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     private boolean isUP_ok(Board board,int i,int j){
-
             // check if not exist
         if(i==0){
             return true;
         }else {
-            if (board.nodes[i-1][j].isPositive&&board.nodes[i][j].isPositive){
+            if(board.nodes[i-1][j].isEmpty||board.nodes[i][j].isEmpty){
+                return true;
+            } else if (board.nodes[i-1][j].isPositive&&board.nodes[i][j].isPositive){
                 return false;
             }else if(!board.nodes[i-1][j].isPositive&&!board.nodes[i][j].isPositive){
                 return false;
             }else {
                 return true;
             }
-
         }
+    }
 
+    private boolean isDown_ok(Board board,int i,int j){
+        // check if not exist
+        if(i== board.n-1){
+            return true;
+        }else {
+            if(board.nodes[i+1][j].isEmpty||board.nodes[i][j].isEmpty){
+                return true;
+            } else if (board.nodes[i+1][j].isPositive&&board.nodes[i][j].isPositive){
+                return false;
+            }else if(!board.nodes[i+1][j].isPositive&&!board.nodes[i][j].isPositive){
+                return false;
+            }else {
+                return true;
+            }
+        }
+    }
+
+    private boolean isRight_ok(Board board,int i,int j){
+        // check if not exist
+        if(j== board.m-1){
+            return true;
+        }else {
+            if(board.nodes[i][j+1].isEmpty||board.nodes[i][j].isEmpty){
+                return true;
+            } else if (board.nodes[i][j+1].isPositive&&board.nodes[i][j].isPositive){
+                return false;
+            }else if(!board.nodes[i][j+1].isPositive&&!board.nodes[i][j].isPositive){
+                return false;
+            }else {
+                return true;
+            }
+        }
+    }
+
+    private boolean isLeft_ok(Board board,int i,int j){
+        // check if not exist
+        if(j== 0){
+            return true;
+        }else {
+            if(board.nodes[i][j-1].isEmpty||board.nodes[i][j].isEmpty){
+                return true;
+            } else if (board.nodes[i][j-1].isPositive&&board.nodes[i][j].isPositive){
+                return false;
+            }else if(!board.nodes[i][j-1].isPositive&&!board.nodes[i][j].isPositive){
+                return false;
+            }else {
+                return true;
+            }
+        }
     }
 
 
