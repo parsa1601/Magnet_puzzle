@@ -55,8 +55,8 @@ public class Constraint {
         // -1 : less
         int count =0;
         for (int i=0;i<board.n;i++){
-            if ( !board.nodes[column][i].isEmpty){
-                if ( board.nodes[column][i].isPositive){
+            if ( !board.nodes[i][column].isEmpty){
+                if ( board.nodes[i][column].isPositive){
                     count++;
 
                 }
@@ -78,14 +78,14 @@ public class Constraint {
         // -1 : less
         int count =0;
         for (int i=0;i<board.n;i++){
-            if ( !board.nodes[column][i].isEmpty){
-                if (! board.nodes[column][i].isPositive){
+            if ( !board.nodes[i][column].isEmpty){
+                if (! board.nodes[i][column].isPositive){
                     count++;
 
                 }
             }
         }
-        if(board.column_positive[column]==count){
+        if(board.column_negative[column]==count){
             return 0;
         }else if(board.column_positive[column]<=count){
             return 1;
@@ -107,19 +107,52 @@ public class Constraint {
     private boolean checkFirst(Board board,Place place){
         int i = place.getFirstNode().rowNum;
         int j = place.getFirstNode().columnNum;
-
+        int d =0;
+        System.out.println(d);
+        if(place.isVertical) {
+            // right , left , up
+            if(isUP_ok(board,i,j)){
+                d++;
+                System.out.println(d);
+            }
+        }else{
+            //left , down , up
+        }
         return false;
     }
     private boolean checkSecond(Board board,Place place){
         int i = place.getSecondNode().rowNum;
         int j = place.getSecondNode().columnNum;
-
+        int d =0;
+        System.out.println(d);
+        if(place.isVertical) {
+            // right , left , down
+        }else{
+            //right , down , up
+            if(isUP_ok(board,i,j)){
+                d++;
+                System.out.println(d);
+            }
+        }
         return false;
     }
 
-    private boolean checkTop(int i,int j){
+    private boolean isUP_ok(Board board,int i,int j){
 
-        return false;
+            // check if not exist
+        if(i==0){
+            return true;
+        }else {
+            if (board.nodes[i-1][j].isPositive&&board.nodes[i][j].isPositive){
+                return false;
+            }else if(!board.nodes[i-1][j].isPositive&&!board.nodes[i][j].isPositive){
+                return false;
+            }else {
+                return true;
+            }
+
+        }
+
     }
 
 

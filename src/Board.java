@@ -97,4 +97,20 @@ public class Board {
 
 
     }
+    public void printer(){
+        for (int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(nodes[i][j].isEmpty){
+                    System.out.print("#  ");
+                }else {
+                    if(nodes[i][j].isPositive){
+                        System.out.print("+  ");
+                    }else {
+                        System.out.print("-  ");
+                    }
+                }
+            }
+            System.out.println();
+        }
+    }
 }
