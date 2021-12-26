@@ -1,3 +1,5 @@
+import javax.xml.stream.FactoryConfigurationError;
+
 public class Constraint {
 
     /**row constraint */
@@ -244,5 +246,33 @@ public class Constraint {
         }
     }
 
+    public boolean isProblemSatisfied(Board board){
+        boolean flag = true;
+        //row p
+        for (int i =0;i<board.n;i++){
+            if ( rowConstraintP(i,board)!=0){
+                flag = false;
+            }
+        }
+        //row n
+        for (int i =0;i<board.n;i++){
+            if ( rowConstraintN(i,board)!=0){
+                flag = false;
+            }
+        }
+        //column p
+        for (int j =0;j<board.m;j++){
+            if ( columnConstraintP(j,board)!=0){
+                flag = false;
+            }
+        }
+        //column n
+        for (int j =0;j<board.m;j++){
+            if ( columnConstraintN(j,board)!=0){
+                flag = false;
+            }
+        }
+        return false;
+    }
 
 }
