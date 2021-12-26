@@ -272,7 +272,7 @@ public class Constraint {
                 flag = false;
             }
         }
-        return false;
+        return flag;
     }
 
 }
