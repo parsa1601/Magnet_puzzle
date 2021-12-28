@@ -2,6 +2,66 @@ import javax.xml.stream.FactoryConfigurationError;
 
 public class Constraint {
 
+    /** all constraints */
+    // in tabe manteqi nist velesh kon
+    /*public boolean isMoveLegal(Board board,Place place){
+        if(isNumericConstraintSatisfied(board,place)
+        &&isMagneticConstraintSatisfied(board,place)){
+            return true;
+        } else return false;
+    }*/
+
+    /**rules of game constraint */
+    // inam niaz nist
+    /*public boolean isNumericConstraintSatisfied(Board board,Place place){
+        if(place.isVertical){
+            if(rowConstraintP(place.getFirstNode().rowNum,board)==0
+            &&rowConstraintN(place.getFirstNode().rowNum,board)==0
+            &&rowConstraintP(place.getSecondNode().rowNum,board)==0
+            &&rowConstraintN(place.getSecondNode().rowNum,board)==0
+            &&columnConstraintP(place.getFirstNode().columnNum,board)==0
+            &&columnConstraintN(place.getFirstNode().columnNum,board)==0){
+                return true;
+            }else return false;
+
+        }else {
+            if(rowConstraintP(place.getFirstNode().rowNum,board)==0
+                    &&rowConstraintN(place.getFirstNode().rowNum,board)==0
+                    &&columnConstraintP(place.getSecondNode().columnNum,board)==0
+                    &&columnConstraintN(place.getSecondNode().columnNum,board)==0
+                    &&columnConstraintP(place.getFirstNode().columnNum,board)==0
+                    &&columnConstraintN(place.getFirstNode().columnNum,board)==0){
+                return true;
+            }else return false;
+        }
+
+    }*/
+    // if return true : need to backtrack
+    public boolean ifAnyRuleBroke(Board board,Place place){
+        if(place.isVertical){
+            if(rowConstraintP(place.getFirstNode().rowNum,board)==1
+                    ||rowConstraintN(place.getFirstNode().rowNum,board)==1
+                    ||rowConstraintP(place.getSecondNode().rowNum,board)==1
+                    ||rowConstraintN(place.getSecondNode().rowNum,board)==1
+                    ||columnConstraintP(place.getFirstNode().columnNum,board)==1
+                    ||columnConstraintN(place.getFirstNode().columnNum,board)==1){
+                return true;
+            }else return false;
+
+        }else {
+            if(rowConstraintP(place.getFirstNode().rowNum,board)==1
+                    ||rowConstraintN(place.getFirstNode().rowNum,board)==1
+                    ||columnConstraintP(place.getSecondNode().columnNum,board)==1
+                    ||columnConstraintN(place.getSecondNode().columnNum,board)==1
+                    ||columnConstraintP(place.getFirstNode().columnNum,board)==1
+                    ||columnConstraintN(place.getFirstNode().columnNum,board)==1){
+                return true;
+            }else return false;
+        }
+
+    }
+
+
     /**row constraint */
 
     public int rowConstraintP(int row,Board board){
@@ -98,7 +158,7 @@ public class Constraint {
     }
 
     /**magnetic constraint */
-
+    // if return false : need backtrack
     public boolean isMagneticConstraintSatisfied(Board board,Place place){
         if(checkFirst(board, place)&&checkSecond(board, place)){
             return true;
