@@ -4,10 +4,12 @@ public class Player {
         Board board = new Board();
         board.boardCreator();
         Constraint constraint = new Constraint();
+        Algorithms solver = new Algorithms();
+
+        System.out.println(solver.backtrack(board));
 
 
-
-
+/*
         board.setPiecePN(board.places.get(0));
         System.out.println(constraint.ifAnyRuleBroke(board,board.places.get(0)));
         System.out.println(constraint.rowConstraintP(0,board));
@@ -37,7 +39,7 @@ public class Player {
         System.out.println(constraint.rowConstraintP(0,board));
         System.out.println(constraint.rowConstraintN(0,board));
         System.out.println(constraint.isMagneticConstraintSatisfied(board,board.places.get(4)));
-        board.printer();
+        board.printer();*/
 
 
 
