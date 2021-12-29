@@ -2,6 +2,7 @@ import javax.xml.stream.FactoryConfigurationError;
 
 public class Constraint {
 
+
     /** all constraints */
     // in tabe manteqi nist velesh kon
     /*public boolean isMoveLegal(Board board,Place place){
@@ -10,7 +11,14 @@ public class Constraint {
             return true;
         } else return false;
     }*/
-
+    // age false bashe backtrack mikhaym
+    public boolean valueSatisfaction(Place place,Board board) {
+        if(ifAnyRuleBroke(board,place)||!isMagneticConstraintSatisfied(board,place)){
+            return false;
+        }else {
+            return true;
+        }
+    }
     /**rules of game constraint */
     // inam niaz nist
     /*public boolean isNumericConstraintSatisfied(Board board,Place place){

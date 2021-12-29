@@ -1,16 +1,20 @@
+import java.util.ArrayList;
+
 public class Place {
 
     Node firstNode ;
     Node secondNode;
-
+    int index;
+    //int m  ; // 0 not set . 1 PN . 2 NP . 3 E
     boolean isEmpty ;
     boolean isVertical;
-    Piece placedPiece ;
+     Piece placedPiece ;
 
+    ArrayList<Piece> values = new ArrayList<>();
     boolean isFirstPositive;
     boolean isSecondPositive;
 
-    public Place(Node firstNode,Node secondNode,boolean isVertical){
+    public Place(Node firstNode,Node secondNode,boolean isVertical,int i){
         this.firstNode = firstNode;
         this.secondNode = secondNode;
         this.isVertical = isVertical;
@@ -18,6 +22,11 @@ public class Place {
         this.firstNode.neighbour = this.secondNode;
         this.secondNode.neighbour = this.firstNode;
         placedPiece = new Piece() ;
+        values.add(new Piece("PN"));
+        values.add(new Piece("NP"));
+        values.add(new Piece());
+        this.index = i ;
+
     }
     public  Place (Piece piece,boolean isVertical){
         this.placedPiece =piece;
@@ -50,4 +59,7 @@ public class Place {
         this.isEmpty = false;
     }
 
+    public Piece getPlacedPiece() {
+        return placedPiece;
+    }
 }

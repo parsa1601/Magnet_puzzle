@@ -47,8 +47,8 @@ public class IO {
             }
             System.out.println();
         }
-        System.out.println(n);
-        System.out.println(m);
+        //System.out.println(n);
+        //System.out.println(m);
         /*System.out.println(row_negative[0]);
         System.out.println(row_positive[4]);
         System.out.println(row_negative[3]);

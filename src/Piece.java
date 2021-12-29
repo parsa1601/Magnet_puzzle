@@ -6,6 +6,19 @@ public class Piece {
     public Piece(){
         this.isEmpty=true;
     }
+    public Piece(String mood){
+        if (mood.equals("PN")) {
+            this.isEmpty = false;
+            this.isNP = false;
+        }
+        if (mood.equals("NP")){
+            this.isEmpty = false;
+            this.isNP = true;
+        }
+        else this.isEmpty = true;
+    }
+
+
     public void setPiecePN(Place p){
         p.firstNode.changeMeP();
         p.secondNode.changeMeN();

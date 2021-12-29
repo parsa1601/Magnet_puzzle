@@ -10,7 +10,7 @@ public class Board {
     int[] column_positive;
     int[] column_negative;
     ArrayList<Place> places = new ArrayList<>();
-
+    int i =0;
     public void boardCreator() {
 
         IO io = new IO();
@@ -57,6 +57,7 @@ public class Board {
 
 
     private Place placeCreator(int i1, int j1, int i2, int j2, boolean isVertical) {
+
         Node tempNode1;
         Node tempNode2;
         Place tempPlace;
@@ -64,7 +65,8 @@ public class Board {
         nodes[i1][j1] = tempNode1;
         tempNode2 = new Node(i2, j2, false);
         nodes[i2][j2] = tempNode2;
-        tempPlace = new Place(tempNode1, tempNode2, isVertical);
+        tempPlace = new Place(tempNode1, tempNode2, isVertical,i);
+        i++;
         return tempPlace;
     }
 
