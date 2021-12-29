@@ -4,7 +4,7 @@ import java.util.LinkedList;
 public class Algorithms {
     Constraint constraint = new Constraint();
     ArrayList<Place> tempPlace = new ArrayList<>();
-   int[] save = new int[1000];
+    int[] save = new int[1000];
     int index= -1;
     Board board;
     public Algorithms(Board board){
@@ -19,15 +19,15 @@ public class Algorithms {
 
         /// iteration in moves (PN,NP,E)
 
-            Place current = select(board);
-            for (int m = 0; m < 3; m++) {
-                assign(board, current, m);
-                if (!constraint.valueSatisfaction(current, board)) {
-                    if (recursiveBacktrack(board)) return true;
-                }
-                unassigned(current);
-
+        Place current = select(board);
+        for (int m = 0; m < 3; m++) {
+            assign(board, current, m);
+            if (constraint.valueSatisfaction(current, board)) {
+                if (recursiveBacktrack(board)) return true;
             }
+            unassigned(current);
+
+        }
 
 
         return false;
@@ -44,32 +44,32 @@ public class Algorithms {
             }
         }
         if (m==0) {
-                board.setPiecePN(place);
-                System.out.println("\n::::::::::\n");
-                board.printer();
+            board.setPiecePN(place);
+            System.out.println("\n::::::::::\n");
+            board.printer();
                 /*if (constraint.valueSatisfaction(place,board)){
                     unassigned(place);
                 }*/
-                return;
-            }
-            if (m==1) {
-                board.setPieceNP(place);
-                System.out.println("\n::::::::::\n");
-                board.printer();
+            return;
+        }
+        if (m==1) {
+            board.setPieceNP(place);
+            System.out.println("\n::::::::::\n");
+            board.printer();
                /* if (constraint.valueSatisfaction(place,board)){
                     unassigned(place);
                 }*/
-                return;
-            }
-            if (m==2) {
-                board.setPieceE(place);
-                System.out.println("\n::::::::::\n");
-                board.printer();
+            return;
+        }
+        if (m==2) {
+            board.setPieceE(place);
+            System.out.println("\n::::::::::\n");
+            board.printer();
                 /*if (constraint.valueSatisfaction(place,board)){
                     unassigned(place);
                 }*/
-                return;
-            }
+            return;
+        }
 
     }
     private void unassigned(Place place){

@@ -16,6 +16,7 @@ public class Constraint {
         if(ifAnyRuleBroke(board,place)||!isMagneticConstraintSatisfied(board,place)){
             return false;
         }else {
+            // yani mishe edame dad
             return true;
         }
     }
