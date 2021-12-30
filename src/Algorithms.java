@@ -117,7 +117,7 @@ public class Algorithms {
         int min = 10;
         int indexOfMin =0;
         for (int i =0;i<board.places.size();i++){
-            if (!board.places.get(i).NoLegalValueLeft&&!board.places.get(i).isAssign){
+            if (!board.places.get(i).isAssign){
                 if (board.places.get(i).legalValueNum<min){
                     indexOfMin = i;
                     min = board.places.get(i).legalValueNum;

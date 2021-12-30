@@ -30,6 +30,7 @@ public class Place {
         legalValueNum=3;
     }
     public void setPlaceUndoAssign(){
+        isAssign = false;
         if(lastValue.isEmpty){
             currentValue.setValueE(this);
         }else {
