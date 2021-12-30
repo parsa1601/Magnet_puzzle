@@ -1,3 +1,5 @@
+import java.sql.SQLOutput;
+
 public class Player {
 
     public void play(){
@@ -8,14 +10,15 @@ public class Player {
         System.out.println(algorithms.backtrack());
         board.printer();
 
+/*
 
-        /*
+        System.out.println(board.sumOFLegals);
         Value value3 = new Value();
         Value value2 = new Value();
         Value value1 = new Value();
-        *//*value1.setValueNP(board.places.get(0));
+        //*value1.setValueNP(board.places.get(0));
         value2.setValueNP(board.places.get(2));
-        value3.setValueNP(board.places.get(3));*//*
+        value3.setValueNP(board.places.get(3));
         System.out.println(constraint.isThisValueLegal(board,board.places.get(2),board.places.get(2).legalValue.get(0) ));
         System.out.println(constraint.isThisValueLegal(board,board.places.get(2),board.places.get(2).legalValue.get(1) ));
         System.out.println(constraint.isThisValueLegal(board,board.places.get(2),board.places.get(1).legalValue.get(2) ));
@@ -33,8 +36,10 @@ public class Player {
         //board.undoAssign(board.places.get(3));
         //System.out.println(constraint.isThisValueLegal(board,board.places.get(3),value3 ));
        // System.out.println(constraint.rowConstraintP(0,board));
+        System.out.println(board.sumOFLegals);
         board.printer();
-    */
+*/
+
         //System.out.println(board.places.size());
         /*for (int i=0;i<board.places.size();i++){
             System.out.println(board.places.get(i).index);

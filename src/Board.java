@@ -52,7 +52,7 @@ public class Board {
         row_negative = io.row_negative;
         column_positive = io.column_positive;
         column_negative = io.column_negative;
-
+        update();
     }
 
 

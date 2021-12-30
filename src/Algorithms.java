@@ -69,18 +69,19 @@ public class Algorithms {
         //if problem solved return true;
         if (constraint.isProblemSatisfied(board)) return true;
         Place  temp = MRV();
-        Value chosen = LCV(temp);
-        if(constraint.isThisValueLegal(board,temp,chosen)){
-            board.assign(temp,chosen);
-            board.printer();
+        for (int i = 0; i<3;i++) {
+            Value chosen = LCV(temp);
+            if (constraint.isThisValueLegal(board, temp, chosen)) {
+                board.assign(temp, chosen);
+                board.printer();
+            }
+            if (recursiveBacktrack()) {
+                return true;
+            } else {
+                board.undoAssign(temp);
+                board.printer();
+            }
         }
-        if (recursiveBacktrack()){
-            return true;
-        }else {
-            board.undoAssign(temp);
-            board.printer();
-        }
-
 
         return false;
     }
