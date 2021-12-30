@@ -1,16 +1,21 @@
+/*
 import javax.xml.stream.FactoryConfigurationError;
 
 public class Constraint {
 
 
-    /** all constraints */
+    */
+/** all constraints *//*
+
     // in tabe manteqi nist velesh kon
-    /*public boolean isMoveLegal(Board board,Place place){
+    */
+/*public boolean isMoveLegal(Board board,Place place){
         if(isNumericConstraintSatisfied(board,place)
         &&isMagneticConstraintSatisfied(board,place)){
             return true;
         } else return false;
-    }*/
+    }*//*
+
     // age false bashe backtrack mikhaym
     public boolean valueSatisfaction(Place place,Board board) {
         if(ifAnyRuleBroke(board,place)||!isMagneticConstraintSatisfied(board,place)){
@@ -20,9 +25,12 @@ public class Constraint {
             return true;
         }
     }
-    /**rules of game constraint */
+    */
+/**rules of game constraint *//*
+
     // inam niaz nist
-    /*public boolean isNumericConstraintSatisfied(Board board,Place place){
+    */
+/*public boolean isNumericConstraintSatisfied(Board board,Place place){
         if(place.isVertical){
             if(rowConstraintP(place.getFirstNode().rowNum,board)==0
             &&rowConstraintN(place.getFirstNode().rowNum,board)==0
@@ -44,7 +52,8 @@ public class Constraint {
             }else return false;
         }
 
-    }*/
+    }*//*
+
     // if return true : need to backtrack
     public boolean ifAnyRuleBroke(Board board,Place place){
         if(place.isVertical){
@@ -71,7 +80,9 @@ public class Constraint {
     }
 
 
-    /**row constraint */
+    */
+/**row constraint *//*
+
 
     public int rowConstraintP(int row,Board board){
         // 1 : more
@@ -118,7 +129,9 @@ public class Constraint {
         return -1;
     }
 
-    /**column constraint*/
+    */
+/**column constraint*//*
+
 
     public int columnConstraintP(int column,Board board){
         // 1 : more
@@ -166,7 +179,9 @@ public class Constraint {
         return -1;
     }
 
-    /**magnetic constraint */
+    */
+/**magnetic constraint *//*
+
     // if return false : need backtrack
     public boolean isMagneticConstraintSatisfied(Board board,Place place){
         if(checkFirst(board, place)&&checkSecond(board, place)){
@@ -319,6 +334,10 @@ public class Constraint {
         boolean flag = true;
         //row p
         for (int i =0;i<board.n;i++){
+            System.out.print("int row ");
+            System.out.print(i);
+            System.out.println(" : ");
+            System.out.println(rowConstraintP(i,board));
             if ( rowConstraintP(i,board)!=0){
                 flag = false;
             }
@@ -344,4 +363,391 @@ public class Constraint {
         return flag;
     }
 
+
+}
+*/
+
+public class Constraint {
+
+    public boolean isProblemSatisfied(Board board){
+        boolean flag = true;
+        //row p
+        for (int i =0;i<board.n;i++){
+            /*System.out.print("int row ");
+            System.out.print(i);
+            System.out.println(" : ");
+            System.out.println(rowConstraintP(i,board));*/
+            if ( OLDrowConstraintP(i,board)!=0){
+                flag = false;
+            }
+        }
+        //row n
+        for (int i =0;i<board.n;i++){
+            if ( OLDrowConstraintN(i,board)!=0){
+                flag = false;
+            }
+        }
+        //column p
+        for (int j =0;j<board.m;j++){
+            if ( OLDcolumnConstraintP(j,board)!=0){
+                flag = false;
+            }
+        }
+        //column n
+        for (int j =0;j<board.m;j++){
+            if ( OLDcolumnConstraintN(j,board)!=0){
+                flag = false;
+            }
+        }
+        return flag;
+    }
+    public boolean isThisValueLegal(Board board,Place place,Value value){
+            return /*magneticLegality(board,place,value)&&*/numericLegality(board,place,value);
+
+    }
+
+    private boolean magneticLegality(Board board,Place place,Value value){
+        /*int f_i = place.first.rowNum;
+        int f_j = place.first.columnNum;
+        int s_i = place.second.rowNum;
+        int s_j = place.second.columnNum;
+         */
+        if(value.isEmpty) {
+            return true;
+        }else {
+                if (place.isVertical){
+                    if(!isUP_ok(board,place.first.rowNum,place.first.columnNum,value.isPN)) return false;
+                    if(!isLeft_ok(board,place.first.rowNum,place.first.columnNum,value.isPN)) return false;
+                    if(!isRight_ok(board,place.first.rowNum,place.first.columnNum,value.isPN)) return false;
+
+                    if(!isDown_ok(board,place.second.rowNum,place.second.columnNum,!value.isPN)) return false;
+                    if(!isLeft_ok(board,place.second.rowNum,place.second.columnNum,!value.isPN)) return false;
+                    if(!isRight_ok(board,place.second.rowNum,place.second.columnNum,!value.isPN)) return false;
+                }else {
+                    if(!isUP_ok(board,place.first.rowNum,place.first.columnNum,value.isPN)) return false;
+                    if(!isLeft_ok(board,place.first.rowNum,place.first.columnNum,value.isPN)) return false;
+                    if(!isDown_ok(board,place.first.rowNum,place.first.columnNum,value.isPN)) return false;
+
+                    if(!isUP_ok(board,place.second.rowNum,place.second.columnNum,!value.isPN)) return false;
+                    if(!isDown_ok(board,place.second.rowNum,place.second.columnNum,!value.isPN)) return false;
+                    if(!isRight_ok(board,place.second.rowNum,place.second.columnNum,!value.isPN)) return false;
+                }
+
+        }
+        return true;
+    }
+    // if true: we can assign
+    // if false : assign -> constraint fuc*ed!
+    private boolean numericLegality(Board board,Place place,Value value){
+        int f_P,f_N,s_P,s_N;
+        if(value.isEmpty) {
+            f_P = 0;
+            f_N = 0;
+            s_P = 0;
+            s_N = 0;
+        }else {
+            if (value.isPN) {
+                f_P = 1;
+                f_N = 0;
+                s_P = 0;
+                s_N = 1;
+            }
+            else   {
+                f_P = 0;
+                f_N = 1;
+                s_P = 1;
+                s_N = 0;
+            }
+        }
+        if (place.isVertical){
+            // check column ,check row_f check row_s
+           if (rowConstraintP(place.first.rowNum,board)+f_P>board.row_positive[place.first.rowNum]) return false;
+           if (rowConstraintN(place.first.rowNum,board)+f_N>board.row_negative[place.first.rowNum]) return false;
+           if (rowConstraintP(place.second.rowNum,board)+s_P>board.row_positive[place.second.rowNum]) return false;
+           if (rowConstraintN(place.second.rowNum,board)+s_N>board.row_negative[place.second.rowNum]) return false;
+           if (columnConstraintP(place.first.columnNum,board)+f_P+s_P>board.column_positive[place.first.columnNum]) return false;
+           if (columnConstraintN(place.first.columnNum,board)+f_N+s_N>board.column_negative[place.first.columnNum]) return false;
+
+        }else {
+            if (columnConstraintP(place.first.columnNum,board)+f_P>board.column_positive[place.first.columnNum]) return false;
+            if (columnConstraintN(place.first.columnNum,board)+f_N>board.column_negative[place.first.columnNum]) return false;
+            if (columnConstraintP(place.second.columnNum,board)+s_P>board.column_positive[place.first.columnNum]) return false;
+            if (columnConstraintN(place.second.columnNum,board)+s_N>board.column_negative[place.first.columnNum]) return false;
+            if (rowConstraintP(place.first.rowNum,board)+f_P+s_P>board.row_positive[place.first.rowNum]) return false;
+            if (rowConstraintN(place.first.rowNum,board)+f_N+s_N>board.row_negative[place.first.rowNum]) return false;
+        }
+        return true;
+    }
+/**  ML */
+private boolean isUP_ok(Board board,int i,int j,boolean isPositive){
+    // check if not exist
+    if(i==0){
+        return true;
+    }else {
+        if(board.nodes[i-1][j].isEmpty){
+            return true;
+        } else if (board.nodes[i-1][j].isPositive&&isPositive){
+            return false;
+        }else if(!board.nodes[i-1][j].isPositive&&!isPositive){
+            return false;
+        }else {
+            return true;
+        }
+    }
+}
+
+    private boolean isDown_ok(Board board,int i,int j,boolean isPositive){
+        // check if not exist
+        if(i== board.n-1){
+            return true;
+        }else {
+            if(board.nodes[i+1][j].isEmpty){
+                return true;
+            } else if (board.nodes[i+1][j].isPositive&&isPositive){
+                return false;
+            }else if(!board.nodes[i+1][j].isPositive&&!isPositive){
+                return false;
+            }else {
+                return true;
+            }
+        }
+    }
+
+    private boolean isRight_ok(Board board,int i,int j,boolean isPositive){
+        // check if not exist
+        if(j== board.m-1){
+            return true;
+        }else {
+            if(board.nodes[i][j+1].isEmpty){
+                return true;
+            } else if (board.nodes[i][j+1].isPositive&&isPositive){
+                return false;
+            }else if(!board.nodes[i][j+1].isPositive&&!isPositive){
+                return false;
+            }else {
+                return true;
+            }
+        }
+    }
+
+    private boolean isLeft_ok(Board board,int i,int j,boolean isPositive){
+        // check if not exist
+        if(j== 0){
+            return true;
+        }else {
+            if(board.nodes[i][j-1].isEmpty){
+                return true;
+            } else if (board.nodes[i][j-1].isPositive&&isPositive){
+                return false;
+            }else if(!board.nodes[i][j-1].isPositive&&!isPositive){
+                return false;
+            }else {
+                return true;
+            }
+        }
+    }
+    /**row constraint */
+
+
+    public int rowConstraintP(int row,Board board){
+        // 1 : more
+        // 0 : constraint satisfied
+        // -1 : less
+        int count =0;
+        for (int j=0;j<board.m;j++){
+            if ( !board.nodes[row][j].isEmpty){
+                if ( board.nodes[row][j].isPositive){
+                    count++;
+
+                }
+            }
+        }
+        /*if(board.row_positive[row]==count){
+            return 0;
+        }else if(board.row_positive[row]<=count){
+            return 1;
+        }else if(board.row_positive[row]>=count){
+            return -1;
+        }*/
+        return count;
+    }
+    public int rowConstraintN(int row,Board board){
+        // 1 : more
+        // 0 : constraint satisfied
+        // -1 : less
+        int count =0;
+        for (int j=0;j<board.m;j++){
+            if ( !board.nodes[row][j].isEmpty){
+                if ( !board.nodes[row][j].isPositive){
+                    count++;
+
+                }
+            }
+        }
+        /*if(board.row_negative[row]==count){
+            return 0;
+        }else if(board.row_negative[row]<=count){
+            return 1;
+        }else if(board.row_negative[row]>=count){
+            return -1;
+        }*/
+        return count;
+    }
+
+/**column constraint*/
+
+
+    public int columnConstraintP(int column,Board board){
+        // 1 : more
+        // 0 : constraint satisfied
+        // -1 : less
+        int count =0;
+        for (int i=0;i<board.n;i++){
+            if ( !board.nodes[i][column].isEmpty){
+                if ( board.nodes[i][column].isPositive){
+                    count++;
+
+                }
+            }
+        }
+        /*if(board.column_positive[column]==count){
+            return 0;
+        }else if(board.column_positive[column]<=count){
+            return 1;
+        }else if(board.column_positive[column]>=count){
+            return -1;
+        }*/
+        return count;
+    }
+
+    public int columnConstraintN(int column,Board board){
+        // 1 : more
+        // 0 : constraint satisfied
+        // -1 : less
+        int count =0;
+        for (int i=0;i<board.n;i++){
+            if ( !board.nodes[i][column].isEmpty){
+                if (! board.nodes[i][column].isPositive){
+                    count++;
+
+                }
+            }
+        }
+        /*if(board.column_negative[column]==count){
+            return 0;
+        }else if(board.column_positive[column]<=count){
+            return 1;
+        }else if(board.column_positive[column]>=count){
+            return -1;
+        }*/
+        return count;
+    }
+
+
+    /**
+     *
+     *
+     *
+     *
+     *
+     *
+     * ****************************************************
+     *
+     */
+/**row constraint */
+
+
+    public int OLDrowConstraintP(int row,Board board){
+        // 1 : more
+        // 0 : constraint satisfied
+        // -1 : less
+        int count =0;
+        for (int j=0;j<board.m;j++){
+            if ( !board.nodes[row][j].isEmpty){
+                if ( board.nodes[row][j].isPositive){
+                    count++;
+
+                }
+            }
+        }
+        if(board.row_positive[row]==count){
+            return 0;
+        }else if(board.row_positive[row]<=count){
+            return 1;
+        }else if(board.row_positive[row]>=count){
+            return -1;
+        }
+        return -1;
+    }
+    public int OLDrowConstraintN(int row,Board board){
+        // 1 : more
+        // 0 : constraint satisfied
+        // -1 : less
+        int count =0;
+        for (int j=0;j<board.m;j++){
+            if ( !board.nodes[row][j].isEmpty){
+                if ( !board.nodes[row][j].isPositive){
+                    count++;
+
+                }
+            }
+        }
+        if(board.row_negative[row]==count){
+            return 0;
+        }else if(board.row_negative[row]<=count){
+            return 1;
+        }else if(board.row_negative[row]>=count){
+            return -1;
+        }
+        return -1;
+    }
+
+/**column constraint*/
+
+
+    public int OLDcolumnConstraintP(int column,Board board){
+        // 1 : more
+        // 0 : constraint satisfied
+        // -1 : less
+        int count =0;
+        for (int i=0;i<board.n;i++){
+            if ( !board.nodes[i][column].isEmpty){
+                if ( board.nodes[i][column].isPositive){
+                    count++;
+
+                }
+            }
+        }
+        if(board.column_positive[column]==count){
+            return 0;
+        }else if(board.column_positive[column]<=count){
+            return 1;
+        }else if(board.column_positive[column]>=count){
+            return -1;
+        }
+        return -1;
+    }
+
+    public int OLDcolumnConstraintN(int column,Board board){
+        // 1 : more
+        // 0 : constraint satisfied
+        // -1 : less
+        int count =0;
+        for (int i=0;i<board.n;i++){
+            if ( !board.nodes[i][column].isEmpty){
+                if (! board.nodes[i][column].isPositive){
+                    count++;
+
+                }
+            }
+        }
+        if(board.column_negative[column]==count){
+            return 0;
+        }else if(board.column_positive[column]<=count){
+            return 1;
+        }else if(board.column_positive[column]>=count){
+            return -1;
+        }
+        return -1;
+    }
 }

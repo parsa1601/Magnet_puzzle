@@ -3,6 +3,7 @@ import java.util.List;
 
 public class Board {
     int n, m;
+    int sumOFLegals;
     int[] row_positive;
     int[] row_negative;
     Node[][] nodes;
@@ -11,8 +12,9 @@ public class Board {
     int[] column_negative;
     ArrayList<Place> places = new ArrayList<>();
     int i =0;
+    Constraint constraint = new Constraint();
     public void boardCreator() {
-
+        sumOFLegals = 0;
         IO io = new IO();
         io.getInput();
         io.output();
@@ -70,15 +72,7 @@ public class Board {
         return tempPlace;
     }
 
-    public void setPieceE(Place p){
-        p.setPlacedPieceEmpty();
-    }
-    public void setPieceNP(Place p){
-        p.setPlacedPieceNP();
-    }
-    public void setPiecePN(Place p){
-        p.setPlacedPiecePN();
-    }
+
 
     public void debug(){
         int c=0;
@@ -99,7 +93,35 @@ public class Board {
 
 
     }
+    public void assign(Place place,Value value){
+        place.setPlaceAssign(value);
+        update();
+    }
+    public void undoAssign(Place place){
+        place.setPlaceUndoAssign();
+        update();
+    }
+    private void update(){
+        // for all place call self updater.
+        sumOFLegals=0;
+        for (Place p : places){
+            placeUpdater(p);
+            sumOFLegals += p.legalValueNum;
+        }
+    }
+    private void placeUpdater(Place place){
+        place.legalValueNum=0;
+        place.NoLegalValueLeft =false;
+        for (int i =0;i<3;i++){
+            if(constraint.isThisValueLegal(this,place,place.legalValue.get(i))){
+                place.legalValue.get(i).isLegal = true;
+                place.legalValueNum++;
+            }
+        }
+        if (place.legalValueNum==0)  place.NoLegalValueLeft =true;
+    }
     public void printer(){
+        System.out.println("*********");
         for (int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 if(nodes[i][j].isEmpty){
@@ -114,5 +136,6 @@ public class Board {
             }
             System.out.println();
         }
+        System.out.println("^^^^^^^^");
     }
 }

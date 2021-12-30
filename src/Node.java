@@ -1,5 +1,4 @@
 public class Node {
-    // left or top
     boolean isFirst;
     boolean isEmpty;
     boolean isPositive;
@@ -21,11 +20,6 @@ public class Node {
     public int getColumnNum() {
         return columnNum;
     }
-
-    public Node getNeighbour() {
-        return neighbour;
-    }
-
     public void changeMeP(){
         this.isEmpty =false;
         isPositive = true;
@@ -35,6 +29,7 @@ public class Node {
         isPositive = false;
     }
     public void changeMeE(){
+        isPositive = false;
         this.isEmpty = true;
 
     }
