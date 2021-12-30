@@ -10,9 +10,8 @@ public class Player {
         System.out.println(algorithms.backtrack());
         board.printer();
 
-/*
 
-        System.out.println(board.sumOFLegals);
+        /*System.out.println(board.sumOFLegals);
         Value value3 = new Value();
         Value value2 = new Value();
         Value value1 = new Value();
@@ -37,15 +36,15 @@ public class Player {
         //System.out.println(constraint.isThisValueLegal(board,board.places.get(3),value3 ));
        // System.out.println(constraint.rowConstraintP(0,board));
         System.out.println(board.sumOFLegals);
+
         board.printer();
-*/
-
+        System.out.println(algorithms.constraint.isProblemSatisfied(algorithms.board));
         //System.out.println(board.places.size());
-        /*for (int i=0;i<board.places.size();i++){
+        for (int i=0;i<board.places.size();i++){
             System.out.println(board.places.get(i).index);
-        }*/
+        }
 
-
+*/
 
         //board.setPiecePN(board.places.get(1));
         //board.setPiecePN(board.places.get(4));

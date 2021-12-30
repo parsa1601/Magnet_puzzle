@@ -12,7 +12,7 @@ public class Place {
     ArrayList<Value> legalValue = new ArrayList<>();
     Value currentValue = new Value();
     Value lastValue= new Value();
-
+    public Place(){}
     public Place(Node f, Node s,boolean isVertical,int i){
         first =f;
         second = s;
@@ -26,7 +26,7 @@ public class Place {
         legalValue.get(0).setValuePN(this);
         legalValue.get(1).setValueNP(this);
         legalValue.get(2).setValueE(this);
-        index = 0;
+        index = i;
         legalValueNum=3;
     }
     public void setPlaceUndoAssign(){

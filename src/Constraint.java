@@ -402,7 +402,7 @@ public class Constraint {
         return flag;
     }
     public boolean isThisValueLegal(Board board,Place place,Value value){
-            return /*magneticLegality(board,place,value)&&*/numericLegality(board,place,value);
+            return magneticLegality(board,place,value)&&numericLegality(board,place,value);
 
     }
 

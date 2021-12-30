@@ -67,28 +67,47 @@ public class Algorithms {
     }
     private boolean recursiveBacktrack(){
         //if problem solved return true;
+
         if (constraint.isProblemSatisfied(board)) return true;
+
         Place  temp = MRV();
-        for (int i = 0; i<3;i++) {
-            Value chosen = LCV(temp);
-            if (constraint.isThisValueLegal(board, temp, chosen)) {
-                board.assign(temp, chosen);
-                board.printer();
-            }
-            if (recursiveBacktrack()) {
-                return true;
-            } else {
-                board.undoAssign(temp);
-                board.printer();
+        System.out.println("Enter");
+
+        while (temp.legalValueNum>0) {
+            System.out.println(temp.index);
+            System.out.println("Enter2");
+            // Value chosen =LCV(temp);
+            Value chosen = new Value();
+            for (int i =0 ; i<3;i++) {
+                chosen=temp.legalValue.get(i);
+                if (chosen.isLegal) {
+                    System.out.println("Enter : " + chosen.str);
+                    board.assign(temp, chosen);
+                    board.printer();
+
+                    if (recursiveBacktrack()) {
+                        return true;
+                    } else {
+                        board.undoAssign(temp);
+                        board.printer();
+                    }
+                }
             }
         }
+       /* if (constraint.isProblemSatisfied(board)) return true;
+        Place temp = new Place();
+        temp = MRV();
+        //board.assign(temp,temp.legalValue.get(1));
+        board.assign(temp,LCV(temp));
+        if (recursiveBacktrack()) return true;
+        board.undoAssign(temp);*/
 
         return false;
     }
 
     // LCV
     private Value LCV(Place place){
-        int x1=0 ,x2=0,x3=0;
+        int x1=0 ,x2=0;
         if (place.legalValue.get(0).isLegal) {
             board.assign(place, place.legalValue.get(0));
             x1 = board.sumOFLegals;
@@ -99,19 +118,16 @@ public class Algorithms {
             x2 = board.sumOFLegals;
             board.undoAssign(place);
         }
-        if (place.legalValue.get(2).isLegal) {
-            board.assign(place, place.legalValue.get(2));
-            x3 = board.sumOFLegals;
-            board.undoAssign(place);
-        }
-        if ( x1>=x2 && x1>=x3){
+
+
+        if ( x1>=x2 ){
             return place.legalValue.get(0);
-        }else if (x2>=x1&&x2>=x3){
+        }else if (x2>x1){
             return place.legalValue.get(1);
-        }else if (x3>=x1 && x3>=x2){
-            return place.legalValue.get(2);
         }
          return place.legalValue.get(2);
+
+
     }
     // MRV
     private Place MRV(){
