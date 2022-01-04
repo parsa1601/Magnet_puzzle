@@ -63,12 +63,16 @@ public class Board {
                 }else{
                     if (border(places.get(i).first,places.get(j).first)){
                         places.get(i).addFriend(places.get(j));
+                        continue;
                     }if (border(places.get(i).first,places.get(j).second)){
                         places.get(i).addFriend(places.get(j));
+                        continue;
                     }if (border(places.get(i).second,places.get(j).first)){
                         places.get(i).addFriend(places.get(j));
+                        continue;
                     }if (border(places.get(i).second,places.get(j).second)){
                         places.get(i).addFriend(places.get(j));
+                        continue;
                     }
                 }
             }
