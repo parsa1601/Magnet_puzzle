@@ -139,19 +139,15 @@ public class Algorithms {
     private Place MRV(){
         int min = 10;
         int indexOfMin =0;
-        for (int i =0;i<board.places.size();i++){
-            System.out.println(i);
-            System.out.println(constraint.isThisValueLegal(board,board.places.get(i),board.places.get(i).legalValue.get(0) ));
-            System.out.println(constraint.isThisValueLegal(board,board.places.get(i),board.places.get(i).legalValue.get(1) ));
-            System.out.println(constraint.isThisValueLegal(board,board.places.get(i),board.places.get(i).legalValue.get(2) ));
-            /*System.out.println(board.places.get(i).legalValue.get(0).isLegal);
-            System.out.println(board.places.get(i).legalValue.get(1).isLegal);
-            System.out.println(board.places.get(i).legalValue.get(2).isLegal);*/
-            System.out.println(board.places.get(i).isAssign);
-            System.out.println(board.places.get(i).currentValue.str);
 
-            if (board.places.get(i).isAssign) continue;
+        for (int i =0;i<board.places.size();i++){
+
+
+           // if (board.places.get(i).isAssign) continue;
+
+
             if (!board.places.get(i).isAssign){
+                System.out.println("Enter IFFFFFFFFFFFFF");
                 if (board.places.get(i).legalValueNum<min){
                     indexOfMin = i;
                     min = board.places.get(i).legalValueNum;
