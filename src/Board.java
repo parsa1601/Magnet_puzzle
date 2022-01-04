@@ -132,6 +132,7 @@ public class Board {
         update();
     }
     public void undoAssign(Place place){
+
         place.setPlaceUndoAssign();
         update();
     }

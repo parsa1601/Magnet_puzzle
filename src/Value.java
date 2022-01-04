@@ -25,7 +25,7 @@ public class Value {
     }
     public void setValueE(Place myOwner){
         isEmpty = true;
-        //isPN = true;
+        isPN = false;
         str ="E";
         myOwner.first.changeMeE();
         myOwner.second.changeMeE();

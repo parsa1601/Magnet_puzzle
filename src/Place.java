@@ -44,7 +44,7 @@ public class Place {
     }
     public void setPlaceAssign(Value value){
 
-        isAssign = true;
+
         if (value.str.equals("PN")){
             System.out.println("done PPPP");
             if(currentValue.isEmpty){
@@ -57,7 +57,7 @@ public class Place {
                 }
             }
             currentValue.setValuePN(this);
-
+            isAssign = true;
           return;
         }
         else if(value.str.equals("NP")){
@@ -74,7 +74,7 @@ public class Place {
                 }
             }
             currentValue.setValueNP(this);
-
+            isAssign = true;
             return;
         }else if(value.str.equals("E")){
             System.out.println("done EEEE");
@@ -90,7 +90,7 @@ public class Place {
                 }
             }
             currentValue.setValueE(this);
-
+            isAssign = true;
             return;
         }
     }

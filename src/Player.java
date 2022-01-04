@@ -7,14 +7,11 @@ public class Player {
         board.boardCreator();
         Constraint constraint = new Constraint();
         Algorithms algorithms = new Algorithms(board);
-
-
-
-        for (Place p : board.places){
-            System.out.println(p.isAssign);
-        }
-        algorithms.backtrack();
+        System.out.println(algorithms.backtrack());
         board.printer();
+//        for (Place p : board.places.get(8).friendList){
+//            System.out.println(p.index);
+//        }
 
 
 

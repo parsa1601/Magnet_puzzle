@@ -74,10 +74,10 @@ public class Algorithms {
     }
     private boolean recursiveBacktrack(){
         //if problem solved return true;
-
         if (constraint.isProblemSatisfied(board)) return true;
         Place  temp = MRV();
        // System.out.println("Enter");
+
         while (temp.legalValueNum>0) {
             //System.out.println(temp.index);
             //System.out.println("Enter2");
@@ -88,7 +88,8 @@ public class Algorithms {
                 if (constraint.isThisValueLegal(board,temp,chosen)) {
                     //System.out.println("Enter : " + chosen.str);
                     board.assign(temp, chosen);
-                   // board.printer();
+                    // board.printer();
+
                     if (recursiveBacktrack()) {
                         return true;
                     } else {
@@ -105,7 +106,6 @@ public class Algorithms {
         board.assign(temp,LCV(temp));
         if (recursiveBacktrack()) return true;
         board.undoAssign(temp);*/
-
         return false;
     }
 
@@ -138,21 +138,23 @@ public class Algorithms {
         int indexOfMin =0;
 
         for (int i =0;i<board.places.size();i++){
-           /* if (i==board.places.size()-1){
-                i=0;
-            }*/
+           // if (board.places.get(i).isAssign) continue;
             if (!board.places.get(i).isAssign){
-                System.out.println(board.places.get(2).legalValueNum);
-
-                if (board.places.get(i).legalValueNum<=min&&board.places.get(i).legalValueNum>0){
-
-                    System.out.println(i);
+                if (board.places.get(i).legalValueNum<=min){
                     indexOfMin = i;
                     min = board.places.get(i).legalValueNum;
-                }
-                board.places.get(i).isAssign = true;
-            }
 
+//                    System.out.println("Enter IFFFFFFFFFFFFF");
+//                    System.out.println("helli i am " + i + " - " +  board.places.get(i).legalValueNum + " my is assign " + board.places.get(i).isAssign);
+//                    if ( i == 2 ) {
+//                        try {
+//                            wait(1000);
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+                }
+            }
         }
         return board.places.get(indexOfMin);
     }
