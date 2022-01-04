@@ -78,6 +78,8 @@ public class Algorithms {
         if (constraint.isProblemSatisfied(board)) return true;
 
         Place  temp = MRV();
+
+
        // System.out.println("Enter");
 
         while (temp.legalValueNum>0) {
@@ -141,19 +143,21 @@ public class Algorithms {
         int indexOfMin =0;
 
         for (int i =0;i<board.places.size();i++){
-
-
-           // if (board.places.get(i).isAssign) continue;
-
-
+           /* if (i==board.places.size()-1){
+                i=0;
+            }*/
             if (!board.places.get(i).isAssign){
-                System.out.println("Enter IFFFFFFFFFFFFF");
-                if (board.places.get(i).legalValueNum<min){
+                System.out.println(board.places.get(2).legalValueNum);
+
+                if (board.places.get(i).legalValueNum<=min&&board.places.get(i).legalValueNum>0){
+
+                    System.out.println(i);
                     indexOfMin = i;
                     min = board.places.get(i).legalValueNum;
                 }
                 board.places.get(i).isAssign = true;
             }
+
         }
         return board.places.get(indexOfMin);
     }
