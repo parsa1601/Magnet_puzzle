@@ -224,3 +224,25 @@ public class Board {
         System.out.println("^^^^^^^^");
     }
 }
+
+///Forward checking logic
+//temp ---> isAssaigned {
+//        for (i iterates in all friendsList){
+//          board.update
+//        friend(i).ligalValues.update
+//            if one of them empty backtrack
+//        if (temp.fristIndex is +){
+//        rowPositive[fristIndex]--
+//        rowNegetive[secondIndex]--
+//        columnPositive[firstIndex]--
+//        columnNegative[secondIndex]--
+//          board.upddate()
+//        }else{
+//        rowPositive[secondIndex]--
+//        rowNegetive[firstIndex]--
+//        columnPositive[secondIndex]--
+//        columnNegative[firstIndex]--
+//            board.upddate()
+//        }
+//        }
+//}
