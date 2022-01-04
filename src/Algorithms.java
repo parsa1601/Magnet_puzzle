@@ -76,12 +76,8 @@ public class Algorithms {
         //if problem solved return true;
 
         if (constraint.isProblemSatisfied(board)) return true;
-
         Place  temp = MRV();
-
-
        // System.out.println("Enter");
-
         while (temp.legalValueNum>0) {
             //System.out.println(temp.index);
             //System.out.println("Enter2");
@@ -93,7 +89,6 @@ public class Algorithms {
                     //System.out.println("Enter : " + chosen.str);
                     board.assign(temp, chosen);
                    // board.printer();
-
                     if (recursiveBacktrack()) {
                         return true;
                     } else {
