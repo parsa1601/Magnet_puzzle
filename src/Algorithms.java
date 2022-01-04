@@ -1,8 +1,5 @@
-/*
-
-
-public class Algorithms {
-    Board board;
+//public class Algorithms {
+/*    Board board;
     int[] save = new int[1000];
     Place p ;
 
@@ -55,15 +52,25 @@ public class Algorithms {
     }
 }
 */
-
 public class Algorithms {
     Board board;
+
+
+
     Constraint constraint = new Constraint();
     public Algorithms(Board board){
         this.board = board;
     }
     public boolean backtrack(){
+//        Array
         return recursiveBacktrack();
+    }
+    private boolean recursiveBacktracking_FC(){
+        if (constraint.isProblemSatisfied(board)) return true;
+        if (board.FC_alert()){
+            return false;
+        }
+        return false;
     }
     private boolean recursiveBacktrack(){
         //if problem solved return true;
@@ -71,25 +78,25 @@ public class Algorithms {
         if (constraint.isProblemSatisfied(board)) return true;
 
         Place  temp = MRV();
-        System.out.println("Enter");
+       // System.out.println("Enter");
 
         while (temp.legalValueNum>0) {
-            System.out.println(temp.index);
-            System.out.println("Enter2");
+            //System.out.println(temp.index);
+            //System.out.println("Enter2");
             // Value chosen =LCV(temp);
             Value chosen = new Value();
             for (int i =0 ; i<3;i++) {
                 chosen=temp.legalValue.get(i);
-                if (chosen.isLegal) {
-                    System.out.println("Enter : " + chosen.str);
+                if (constraint.isThisValueLegal(board,temp,chosen)) {
+                    //System.out.println("Enter : " + chosen.str);
                     board.assign(temp, chosen);
-                    board.printer();
+                   // board.printer();
 
                     if (recursiveBacktrack()) {
                         return true;
                     } else {
                         board.undoAssign(temp);
-                        board.printer();
+                        //board.printer();
                     }
                 }
             }
@@ -122,10 +129,9 @@ public class Algorithms {
 
         if ( x1>=x2 ){
             return place.legalValue.get(0);
-        }else if (x2>x1){
+        }else {
             return place.legalValue.get(1);
         }
-         return place.legalValue.get(2);
 
 
     }
@@ -134,11 +140,23 @@ public class Algorithms {
         int min = 10;
         int indexOfMin =0;
         for (int i =0;i<board.places.size();i++){
+            System.out.println(i);
+            System.out.println(constraint.isThisValueLegal(board,board.places.get(i),board.places.get(i).legalValue.get(0) ));
+            System.out.println(constraint.isThisValueLegal(board,board.places.get(i),board.places.get(i).legalValue.get(1) ));
+            System.out.println(constraint.isThisValueLegal(board,board.places.get(i),board.places.get(i).legalValue.get(2) ));
+            /*System.out.println(board.places.get(i).legalValue.get(0).isLegal);
+            System.out.println(board.places.get(i).legalValue.get(1).isLegal);
+            System.out.println(board.places.get(i).legalValue.get(2).isLegal);*/
+            System.out.println(board.places.get(i).isAssign);
+            System.out.println(board.places.get(i).currentValue.str);
+
+            if (board.places.get(i).isAssign) continue;
             if (!board.places.get(i).isAssign){
                 if (board.places.get(i).legalValueNum<min){
                     indexOfMin = i;
                     min = board.places.get(i).legalValueNum;
                 }
+                board.places.get(i).isAssign = true;
             }
         }
         return board.places.get(indexOfMin);

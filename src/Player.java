@@ -7,8 +7,12 @@ public class Player {
         board.boardCreator();
         Constraint constraint = new Constraint();
         Algorithms algorithms = new Algorithms(board);
-        System.out.println(algorithms.backtrack());
-        board.printer();
+       /* System.out.println(algorithms.backtrack());
+        board.printer();*/
+        for (Place p : board.places.get(4).friendList){
+            System.out.println(p.index);
+        }
+
 
 
         /*System.out.println(board.sumOFLegals);

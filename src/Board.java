@@ -53,10 +53,40 @@ public class Board {
         column_positive = io.column_positive;
         column_negative = io.column_negative;
         update();
+        makeThemFriend();
+    }
+    private void makeThemFriend(){
+        for (int i =0;i< places.size();i++){
+            for (int j=0;j< places.size();j++){
+                if (i==j){
+                    continue;
+                }else{
+                    if (border(places.get(i).first,places.get(j).first)){
+                        places.get(i).addFriend(places.get(j));
+                    }if (border(places.get(i).first,places.get(j).second)){
+                        places.get(i).addFriend(places.get(j));
+                    }if (border(places.get(i).second,places.get(j).first)){
+                        places.get(i).addFriend(places.get(j));
+                    }if (border(places.get(i).second,places.get(j).second)){
+                        places.get(i).addFriend(places.get(j));
+                    }
+                }
+            }
+        }
     }
 
-
-
+    private boolean border(Node me , Node neighbour){
+        if (me.rowNum==neighbour.rowNum&&me.columnNum-1==neighbour.columnNum){
+            return true;
+        }if (me.rowNum==neighbour.rowNum&&me.columnNum+1==neighbour.columnNum){
+            return true;
+        }if (me.rowNum-1==neighbour.rowNum&&me.columnNum==neighbour.columnNum){
+            return true;
+        }if (me.rowNum+1==neighbour.rowNum&&me.columnNum==neighbour.columnNum){
+            return true;
+        }
+        return false;
+    }
 
     private Place placeCreator(int i1, int j1, int i2, int j2, boolean isVertical) {
 
@@ -109,11 +139,61 @@ public class Board {
             sumOFLegals += p.legalValueNum;
         }
     }
+    private void update_A(){
+        // for all place call self updater.
+        sumOFLegals=0;
+        for (Place p : places){
+            placeUpdater_A(p);
+            sumOFLegals += p.legalValueNum;
+        }
+    }
+    public boolean FC_alert(){
+        // for all place call self updater.
+        for (Place p : places){
+            if (p.legalValueNum==0) return true;
+        }
+        return false;
+    }
     private void placeUpdater(Place place){
+        //System.out.println("old");
         place.legalValueNum=0;
         place.NoLegalValueLeft =false;
+        /*place.legalValue.get(0).isLegal = false;
+        place.legalValue.get(1).isLegal = false;
+        place.legalValue.get(2).isLegal = false;*/
         for (int i =0;i<3;i++){
-            if(constraint.isThisValueLegal(this,place,place.legalValue.get(i))){
+            if(constraint.isThisValueLegal(this,place,place.legalValue.get(i))&& !place.isAssign){
+                place.legalValue.get(i).isLegal = true;
+                place.legalValueNum++;
+            }
+        }
+        if (place.legalValueNum==0)  place.NoLegalValueLeft =true;
+    }
+    private void placeUpdater_A(Place place){
+        place.legalValueNum=0;
+        place.NoLegalValueLeft =false;
+        //System.out.println("a");
+       /* place.legalValue.get(0).isLegal = false;
+        place.legalValue.get(1).isLegal = false;
+        place.legalValue.get(2).isLegal = false;*/
+        for (int i =0;i<3;i++){
+           /* System.out.println(place.legalValue.get(i).str);
+            System.out.println(place.currentValue.str);
+            System.out.println(place.isAssign);*/
+            if (place.legalValue.get(i).str.equals(place.currentValue.str)&& place.isAssign){
+               /* System.out.println("in the if");
+                System.out.println(place.legalValue.get(i).str);
+                System.out.println(place.isAssign);
+                System.out.println(place.legalValue.get(i).isLegal);*/
+                place.legalValue.get(i).isLegal = false;
+                //System.out.println(place.legalValue.get(i).isLegal);
+               // System.out.println("^^^^^");
+            }else if(constraint.isThisValueLegal(this,place,place.legalValue.get(i))){
+               /* System.out.println("second if");
+                System.out.println(place.index);
+                System.out.println(i);
+                System.out.println(place.legalValue.get(i).isLegal);
+                System.out.println("&&&&&");*/
                 place.legalValue.get(i).isLegal = true;
                 place.legalValueNum++;
             }

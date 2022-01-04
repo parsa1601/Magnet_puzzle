@@ -12,6 +12,7 @@ public class Place {
     ArrayList<Value> legalValue = new ArrayList<>();
     Value currentValue = new Value();
     Value lastValue= new Value();
+    ArrayList<Place> friendList = new ArrayList<>();
     public Place(){}
     public Place(Node f, Node s,boolean isVertical,int i){
         first =f;
@@ -91,5 +92,7 @@ public class Place {
 
     //public void updateLegalList(){}
 
-
+    public void addFriend(Place myFriend){
+        friendList.add(myFriend);
+    }
 }

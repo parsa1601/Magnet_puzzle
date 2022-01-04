@@ -471,8 +471,8 @@ public class Constraint {
         }else {
             if (columnConstraintP(place.first.columnNum,board)+f_P>board.column_positive[place.first.columnNum]) return false;
             if (columnConstraintN(place.first.columnNum,board)+f_N>board.column_negative[place.first.columnNum]) return false;
-            if (columnConstraintP(place.second.columnNum,board)+s_P>board.column_positive[place.first.columnNum]) return false;
-            if (columnConstraintN(place.second.columnNum,board)+s_N>board.column_negative[place.first.columnNum]) return false;
+            if (columnConstraintP(place.second.columnNum,board)+s_P>board.column_positive[place.second.columnNum]) return false;
+            if (columnConstraintN(place.second.columnNum,board)+s_N>board.column_negative[place.second.columnNum]) return false;
             if (rowConstraintP(place.first.rowNum,board)+f_P+s_P>board.row_positive[place.first.rowNum]) return false;
             if (rowConstraintN(place.first.rowNum,board)+f_N+s_N>board.row_negative[place.first.rowNum]) return false;
         }
