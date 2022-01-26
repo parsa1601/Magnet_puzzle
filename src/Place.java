@@ -108,3 +108,6 @@ public class Place {
         friendList.add(myFriend);
     }
 }
+
+
+///Last commit
