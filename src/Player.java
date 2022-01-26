@@ -9,9 +9,21 @@ public class Player {
         Algorithms algorithms = new Algorithms(board);
         System.out.println(algorithms.backtrack());
         board.printer();
-//        for (Place p : board.places.get(8).friendList){
-//            System.out.println(p.index);
-//        }
+
+       /* for (Place p : board.places.get(0).friendList){
+            System.out.println(p.index);
+        }*/
+       /* System.out.println(constraint.isAllOFMYFriendAssign(board.places.get(0)));
+        board.assign(board.places.get(0),board.places.get(1).legalValue.get(1) );
+        board.assign(board.places.get(1),board.places.get(1).legalValue.get(1) );
+        board.assign(board.places.get(2),board.places.get(1).legalValue.get(1) );
+        board.assign(board.places.get(3),board.places.get(1).legalValue.get(1) );
+        board.assign(board.places.get(4),board.places.get(1).legalValue.get(1) );
+        board.assign(board.places.get(5),board.places.get(1).legalValue.get(1) );
+        board.assign(board.places.get(6),board.places.get(1).legalValue.get(1) );
+        board.assign(board.places.get(13),board.places.get(1).legalValue.get(1) );
+        System.out.println(constraint.isAllOFMYFriendAssign(board.places.get(0)));*/
+
 
 
 

@@ -9,6 +9,10 @@ public class Place {
     int index =-1;
     boolean isVertical;
     boolean isAssign;
+    boolean is_PN_NotInDomain;
+    boolean is_NP_NotInDomain;
+    boolean is_E_NotInDomain;
+    int tried = 0;
     ArrayList<Value> legalValue = new ArrayList<>();
     Value currentValue = new Value();
     Value lastValue= new Value();
@@ -29,6 +33,9 @@ public class Place {
         legalValue.get(2).setValueE(this);
         index = i;
         legalValueNum=3;
+        is_PN_NotInDomain = false;
+        is_NP_NotInDomain = false;
+        is_E_NotInDomain = false;
     }
     public void setPlaceUndoAssign(){
         isAssign = false;
@@ -46,7 +53,7 @@ public class Place {
 
 
         if (value.str.equals("PN")){
-            System.out.println("done PPPP");
+            //System.out.println("done PPPP");
             if(currentValue.isEmpty){
                 lastValue.setValueE(this);
             }else {
@@ -61,7 +68,7 @@ public class Place {
           return;
         }
         else if(value.str.equals("NP")){
-            System.out.println("done NNNN");
+            //System.out.println("done NNNN");
             if(currentValue.isEmpty){
                 lastValue.setValueE(this);
             }else {
@@ -77,7 +84,7 @@ public class Place {
             isAssign = true;
             return;
         }else if(value.str.equals("E")){
-            System.out.println("done EEEE");
+            //System.out.println("done EEEE");
             if(currentValue.isEmpty){
                 lastValue.setValueE(this);
             }else {

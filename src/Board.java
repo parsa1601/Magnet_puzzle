@@ -74,6 +74,7 @@ public class Board {
                         places.get(i).addFriend(places.get(j));
                         continue;
                     }
+                    if (friendByNum(places.get(i),places.get(j))) places.get(i).addFriend(places.get(j));
                 }
             }
         }
@@ -88,6 +89,32 @@ public class Board {
             return true;
         }if (me.rowNum+1==neighbour.rowNum&&me.columnNum==neighbour.columnNum){
             return true;
+        }
+        return false;
+    }
+    private boolean friendByNum(Place p1,Place p2){
+
+        if (p1.isVertical){
+            if (p1.first.columnNum==p2.first.columnNum||p1.first.columnNum==p2.second.columnNum){
+                return true;
+            }
+            if (p1.first.rowNum==p2.first.rowNum||p1.first.rowNum==p2.second.rowNum){
+                return true;
+            }
+            if (p1.second.rowNum==p2.first.rowNum||p1.second.rowNum==p2.second.rowNum){
+                return true;
+            }
+        }else {
+            if (p1.first.columnNum==p2.first.columnNum||p1.first.columnNum==p2.second.columnNum){
+                return true;
+            }
+            if (p1.second.columnNum==p2.first.columnNum||p1.second.columnNum==p2.second.columnNum){
+                return true;
+            }
+            if (p1.first.rowNum==p2.first.rowNum||p1.first.rowNum==p2.second.rowNum){
+                return true;
+            }
+
         }
         return false;
     }
@@ -111,18 +138,18 @@ public class Board {
     public void debug(){
         int c=0;
         /**
-        for (Place p : places){
-            System.out.println("this is place:");
-            System.out.println(c);
-            System.out.println(p.isVertical);
-            System.out.println("this is place first node:");
-            System.out.println(p.getFirstNode().getRowNum());
-            System.out.println(p.getFirstNode().getColumnNum());
-            System.out.println("this is place second node:");
-            System.out.println(p.getSecondNode().getRowNum());
-            System.out.println(p.getSecondNode().getColumnNum());
-            c++;
-        }**/
+         for (Place p : places){
+         System.out.println("this is place:");
+         System.out.println(c);
+         System.out.println(p.isVertical);
+         System.out.println("this is place first node:");
+         System.out.println(p.getFirstNode().getRowNum());
+         System.out.println(p.getFirstNode().getColumnNum());
+         System.out.println("this is place second node:");
+         System.out.println(p.getSecondNode().getRowNum());
+         System.out.println(p.getSecondNode().getColumnNum());
+         c++;
+         }**/
         System.out.println(row_positive[0]);
 
 
@@ -152,6 +179,7 @@ public class Board {
             sumOFLegals += p.legalValueNum;
         }
     }
+    /** write again*/
     public boolean FC_alert(){
         // for all place call self updater.
         for (Place p : places){
@@ -192,7 +220,7 @@ public class Board {
                 System.out.println(place.legalValue.get(i).isLegal);*/
                 place.legalValue.get(i).isLegal = false;
                 //System.out.println(place.legalValue.get(i).isLegal);
-               // System.out.println("^^^^^");
+                // System.out.println("^^^^^");
             }else if(constraint.isThisValueLegal(this,place,place.legalValue.get(i))){
                /* System.out.println("second if");
                 System.out.println(place.index);
